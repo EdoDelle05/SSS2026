@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('Esiste il file jenkinsfile?'){
             steps{
-                sh echo "Il file jenkinsfile esiste"
+                sh 'echo "Il file jenkinsfile esiste"'
                 sh 'pwd'
                 sh 'ls -la' 
             }
