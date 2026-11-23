@@ -1,0 +1,28 @@
+services:
+  backend:
+    image: banking-backend:v1
+    container_name: banking-backend
+    command: ["--root-path", "/api"]
+    networks:
+      - banking-net
+
+  frontend:
+    image: banking-frontend:v1
+    container_name: banking-frontend
+    networks:
+      - banking-net
+
+  proxy:
+    image: banking-proxy:v1
+    container_name: banking-proxy
+    ports:
+      - "8080:8080"
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - banking-net
+
+networks:
+  banking-net:
+    driver: bridge
