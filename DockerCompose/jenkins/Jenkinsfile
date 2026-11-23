@@ -1,28 +1,26 @@
-pipeline{
+pipeline {
     agent any
-    stages{
-        stage('Esiste il file jenkinsfile?'){
-            steps{
+    stages {
+        stage('Esiste il file jenkinsfile?') {
+            steps {
                 sh 'echo "Il file jenkinsfile esiste"'
                 sh 'pwd'
-                sh 'ls -la' 
+                sh 'ls -la'
             }
         }
         stage('Build Backend Image') {
             steps {
                 dir('DockerCompose/backend') {
-                    sh 'docker build -t somebankingapp-backend:latest -f Dockerfile .'
+                    sh 'docker build -t somebankingapp-backend:latest -f docker .'
                 }
             }
         }
-
         stage('Build Frontend Image') {
             steps {
                 dir('DockerCompose/frontend') {
-                    sh 'docker build -t somebankingapp-frontend:latest -f Dockerfile .'
+                    sh 'docker build -t somebankingapp-frontend:latest -f docker .'
                 }
             }
         }
-
     }
 }
